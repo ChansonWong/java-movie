@@ -7,6 +7,7 @@ import com.superatom.javamovie.model.vo.MovieInfo;
 import com.superatom.javamovie.model.vo.SearchResult;
 import com.superatom.javamovie.service.cinema.CinemaService;
 import com.superatom.javamovie.service.search.SearchService;
+import com.superatom.javamovie.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,13 @@ public class MovieController {
     CinemaService cinemaService;
     @Autowired
     SearchService searchService;
+    @Autowired
+    UserService userService;
+
+    @RequestMapping("/api/getUuid")
+    public String getUuid(){
+        return userService.getUuid();
+    }
 
     @RequestMapping("/api/selectCinemaMoviesTime")
     public MovieInfo selectCinemaMoviesTime(@RequestParam("cinemaid") String cinemaid,
