@@ -15,7 +15,7 @@ public class SearchService {
     @Autowired
     UserService userService;
 
-    public String search(String cityid, String page, String pos, String scene, String search){
+    public String search(String cityid, String page, String pos, String scene, String search, String uid){
         String url = "https://webapi2.qingbh.com/manman/index.php/api/v2/search/index";
 
         List<RequestParam> paramList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class SearchService {
         paramList.add(new RequestParam("pos", pos));
         paramList.add(new RequestParam("scene", scene));
         paramList.add(new RequestParam("search", search));
-        paramList.add(new RequestParam("uid", userService.getUuid()));
+        paramList.add(new RequestParam("uid", uid));
         String sign = Md5Util.getMd5(paramList);
         paramList.add(new RequestParam("sign", sign));
         return RestUtil.post(url, paramList);

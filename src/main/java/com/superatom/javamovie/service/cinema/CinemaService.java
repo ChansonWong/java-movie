@@ -23,7 +23,7 @@ public class CinemaService {
      * @param day
      * @return
      */
-    public String SelectCinemaMoviesTime(String cinemaid, String movieid, String hasday, String day){
+    public String SelectCinemaMoviesTime(String cinemaid, String movieid, String hasday, String day, String uuid){
         String url = "https://webapi2.qingbh.com/manman/index.php/api/v2/movies/plays";
 
         List<RequestParam> paramList = new ArrayList<>();
@@ -34,7 +34,7 @@ public class CinemaService {
             paramList.add(new RequestParam("day", day));
         }
         paramList.add(new RequestParam("movieid", movieid));
-        paramList.add(new RequestParam("uid", userService.getUuid()));
+        paramList.add(new RequestParam("uid", uuid));
         String sign = Md5Util.getMd5(paramList);
         paramList.add(new RequestParam("sign", sign));
 
@@ -54,7 +54,7 @@ public class CinemaService {
      */
     public String selectCinemaList(String cityid, String movieid,
                                     String order, String pos, String regionname,
-                                    String page, String step){
+                                    String uid, String page, String step){
         String url = "https://webapi2.qingbh.com/manman/index.php/api/v2/recommend/cinemas";
 
         List<RequestParam> paramList = new ArrayList<>();
@@ -65,7 +65,7 @@ public class CinemaService {
         paramList.add(new RequestParam("pos", pos));
         paramList.add(new RequestParam("regionname", regionname));
         paramList.add(new RequestParam("step", step));
-        paramList.add(new RequestParam("uid", userService.getUuid()));
+        paramList.add(new RequestParam("uid", uid));
         String sign = Md5Util.getMd5(paramList);
         paramList.add(new RequestParam("sign", sign));
         return RestUtil.post(url, paramList);

@@ -34,8 +34,9 @@ public class MovieController {
     public MovieInfo selectCinemaMoviesTime(@RequestParam("cinemaid") String cinemaid,
                                            @RequestParam("movieid") String movieid,
                                            @RequestParam(value = "hasday",required = false) String hasday,
-                                           @RequestParam(value = "day", required = false) String day) {
-        String scheduleResultJson = cinemaService.SelectCinemaMoviesTime(cinemaid, movieid, hasday, day);
+                                           @RequestParam(value = "day", required = false) String day,
+                                            @RequestParam("uuid") String uuid) {
+        String scheduleResultJson = cinemaService.SelectCinemaMoviesTime(cinemaid, movieid, hasday, day, uuid);
         Gson gson = new Gson();
         MovieInfo movieInfo = gson.fromJson(scheduleResultJson, MovieInfo.class);
         priceFilter(movieInfo);
@@ -58,8 +59,9 @@ public class MovieController {
     public MovieDetail selectCinemaList(@RequestParam("cityid") String cityid, @RequestParam("movieid") String movieid,
                                         @RequestParam("order") String order, @RequestParam("pos") String pos,
                                         @RequestParam("regionname") String regionname, @RequestParam("page") String page,
-                                        @RequestParam("step") String step){
-        String cinameResultJson = cinemaService.selectCinemaList(cityid, movieid, order, pos, regionname, page, step);
+                                        @RequestParam("step") String step,
+                                        @RequestParam("uid") String uid){
+        String cinameResultJson = cinemaService.selectCinemaList(cityid, movieid, order, pos, regionname, uid, page, step);
         Gson gson = new Gson();
         MovieDetail movieDetail = gson.fromJson(cinameResultJson, MovieDetail.class);
         movieDetailFilter(movieDetail.getCinemas());
@@ -80,8 +82,9 @@ public class MovieController {
                                @RequestParam(value = "page", required = false) String page,
                                @RequestParam(value = "pos", required = false) String pos,
                                @RequestParam(value = "scene", required = false) String scene,
-                               @RequestParam(value = "search", required = false) String search) {
-        String searchJson = searchService.search(cityid, page, pos, scene, search);
+                               @RequestParam(value = "search", required = false) String search,
+                               @RequestParam(value = "uid") String uid) {
+        String searchJson = searchService.search(cityid, page, pos, scene, search, uid);
         Gson gson = new Gson();
         SearchResult searchResult = gson.fromJson(searchJson, SearchResult.class);
         if (searchResult.getCinemas().size() > 0){
