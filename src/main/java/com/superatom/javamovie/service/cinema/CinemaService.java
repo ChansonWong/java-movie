@@ -70,4 +70,21 @@ public class CinemaService {
         paramList.add(new RequestParam("sign", sign));
         return RestUtil.post(url, paramList);
     }
+
+    public String getSeat(){
+        String url = "https://webapi2.qingbh.com/manman/index.php/api/v2/seat/map";
+
+        List<RequestParam> paramList = new ArrayList<>();
+        paramList.add(new RequestParam("typeid", cityid));
+        paramList.add(new RequestParam("typeseat", cityid));
+        paramList.add(new RequestParam("cinemaid", cityid));
+        paramList.add(new RequestParam("movieid", cityid));
+        paramList.add(new RequestParam("playid", cityid));
+        paramList.add(new RequestParam("type", cityid));
+        paramList.add(new RequestParam("cityid", cityid));
+        paramList.add(new RequestParam("uid", cityid));
+        String sign = Md5Util.getMd5(paramList);
+        paramList.add(new RequestParam("sign", sign));
+        return RestUtil.post(url, paramList);
+    }
 }
