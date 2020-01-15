@@ -5,6 +5,7 @@ import com.superatom.javamovie.model.vo.CinemaInfo;
 import com.superatom.javamovie.model.vo.MovieDetail;
 import com.superatom.javamovie.model.vo.MovieInfo;
 import com.superatom.javamovie.model.vo.SearchResult;
+import com.superatom.javamovie.model.vo.SeatResult;
 import com.superatom.javamovie.service.cinema.CinemaService;
 import com.superatom.javamovie.service.search.SearchService;
 import com.superatom.javamovie.service.user.UserService;
@@ -92,6 +93,32 @@ public class MovieController {
         }
 
         return searchResult;
+    }
+
+    /**
+     * 查询座位信息
+     * @param typeid
+     * @param typeseat
+     * @param cinemaid
+     * @param movieid
+     * @param playid
+     * @param type
+     * @param cityid
+     * @param uid
+     * @return
+     */
+    public SeatResult getSeat(@RequestParam("typeid") String typeid,
+                              @RequestParam("typeseat") String typeseat,
+                              @RequestParam("cinemaid") String cinemaid,
+                              @RequestParam("movieid") String movieid,
+                              @RequestParam("playid") String playid,
+                              @RequestParam("type") String type,
+                              @RequestParam("cityid") String cityid,
+                              @RequestParam("uid") String uid){
+        String seatJson = cinemaService.getSeat(typeid, typeseat, cinemaid, movieid, playid, type, cityid, uid);
+        Gson gson = new Gson();
+        SeatResult result = gson.fromJson(seatJson, SeatResult.class);
+        return result;
     }
 
     private void movieDetailFilter(List<CinemaInfo> cinemas) {

@@ -71,18 +71,31 @@ public class CinemaService {
         return RestUtil.post(url, paramList);
     }
 
-    public String getSeat(){
+    /**
+     * 查询座位信息
+     * @param typeid
+     * @param typeseat
+     * @param cinemaid
+     * @param movieid
+     * @param playid
+     * @param type
+     * @param cityid
+     * @param uid
+     * @return
+     */
+    public String getSeat(String typeid, String typeseat, String cinemaid, String movieid,
+                          String playid, String type, String cityid, String uid){
         String url = "https://webapi2.qingbh.com/manman/index.php/api/v2/seat/map";
 
         List<RequestParam> paramList = new ArrayList<>();
-        paramList.add(new RequestParam("typeid", cityid));
-        paramList.add(new RequestParam("typeseat", cityid));
-        paramList.add(new RequestParam("cinemaid", cityid));
-        paramList.add(new RequestParam("movieid", cityid));
-        paramList.add(new RequestParam("playid", cityid));
-        paramList.add(new RequestParam("type", cityid));
+        paramList.add(new RequestParam("typeid", typeid));
+        paramList.add(new RequestParam("typeseat", typeseat));
+        paramList.add(new RequestParam("cinemaid", cinemaid));
+        paramList.add(new RequestParam("movieid", movieid));
+        paramList.add(new RequestParam("playid", playid));
+        paramList.add(new RequestParam("type", type));
         paramList.add(new RequestParam("cityid", cityid));
-        paramList.add(new RequestParam("uid", cityid));
+        paramList.add(new RequestParam("uid", uid));
         String sign = Md5Util.getMd5(paramList);
         paramList.add(new RequestParam("sign", sign));
         return RestUtil.post(url, paramList);
